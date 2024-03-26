@@ -1,7 +1,7 @@
 import grpc
 from grpc import aio
-import service_pb2 as utc_bot_pb2
-import service_pb2_grpc as utc_bot_pb2_grpc
+from . import service_pb2 as utc_bot_pb2
+from . import service_pb2_grpc as utc_bot_pb2_grpc
 from enum import Enum
 import logging
 from dataclasses import dataclass, field
