@@ -1,6 +1,6 @@
 from typing import Optional
 
-import xchange_client
+from xchangelib import xchange_client
 import asyncio
 
 
