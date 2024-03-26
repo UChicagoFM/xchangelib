@@ -1,6 +1,6 @@
 from typing import Optional
 
-import xchange_client
+from xchangelib import xchange_client
 import asyncio
 
 
@@ -84,7 +84,7 @@ class MyXchangeClient(xchange_client.XChangeClient):
 
 
 async def main():
-    SERVER = '18.188.190.235:3333' # run on sandbox
+    SERVER = 'staging.uchicagotradingcompetition.com:3333' # run on sandbox
     my_client = MyXchangeClient(SERVER,"USERNAME","PASSWORD")
     await my_client.start()
     return
