@@ -16,6 +16,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+license = {text = "MIT License"}
 
 [project.urls]
 Homepage = "https://github.com/UChicagoFM/xchangelib"
+
+
