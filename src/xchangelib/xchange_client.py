@@ -26,10 +26,10 @@ class SwapInfo:
     is_flat: bool
 
 
-SWAP_MAP = {'toJAK': SwapInfo('toJAK', [('EPT', 1), ('DLO', 4), ('MKU', 2)], [('JAK', 1)], 5, True),
-            'fromJAK': SwapInfo('fromJAK', [('JAK', 1)], [('EPT', 1), ('DLO', 4), ('MKU', 2)], 5, True),
-            'toSCP': SwapInfo('toSCP', [('IGM', 2), ('BRV', 3), ('EPT', 2)], [('SCP', 1)], 5, True),
-            'fromSCP': SwapInfo('fromSCP', [('SCP', 1)], [('IGM', 2), ('BRV', 3), ('EPT', 2)], 5, True),
+SWAP_MAP = {'toJAK': SwapInfo('toJAK', [('EPT', 2), ('DLO', 5), ('MKU', 3)], [('JAK', 10)], 5, True),
+            'fromJAK': SwapInfo('fromJAK', [('JAK', 10)], [('EPT', 2), ('DLO', 5), ('MKU', 3)], 5, True),
+            'toSCP': SwapInfo('toSCP', [('IGM', 3), ('BRV', 4), ('EPT', 3)], [('SCP', 10)], 5, True),
+            'fromSCP': SwapInfo('fromSCP', [('SCP', 10)], [('IGM', 3), ('BRV', 4), ('EPT', 3)], 5, True),
             }
 
 SYMBOLS = ["JMS", "JAK", "EPT", "DLO", "MKU", "IGM", "BRV", "SCP"]
