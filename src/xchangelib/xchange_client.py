@@ -64,7 +64,7 @@ class XChangeClient:
         self.positions = defaultdict(int)
         self.open_orders = dict()
         self.order_books = {sym: OrderBook() for sym in SYMBOLS}
-        self.order_id = int(time.time())  # start order id number from time
+        self.order_id = int(time.time() * 1e9)  # start order id number from time
         self.history = []
         self.connected = False
         self.call = None

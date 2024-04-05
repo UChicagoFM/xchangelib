@@ -140,4 +140,16 @@ information about the helper functions.
         print("My positions:", self.positions)
 
 
+The order books are stored in :code:`XChangeClient.order_books`. Below is an example
+code block that prints the sorted order books.
+
+.. code-block:: python
+
+        for security, book in self.order_books.items():
+            sorted_bids = sorted((k,v) for k,v in book.bids.items() if v != 0)
+            sorted_asks = sorted((k,v) for k,v in book.asks.items() if v != 0)
+            print(f"Bids for {security}:\n{sorted_bids}")
+            print(f"Asks for {security}:\n{sorted_asks}")
+
+
 You can look at the entire example bot in  **example.py**
