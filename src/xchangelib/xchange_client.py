@@ -114,11 +114,11 @@ class XChangeClient:
             order_request = utc_bot_pb2.NewOrderRequest(symbol=symbol, id=str(self.order_id), limit=limit_order_msg,
                                                         side=side)
         request = utc_bot_pb2.ClientMessageToExchange(new_order=order_request)
-        await self.call.write(request)
-        self.open_orders[str(self.order_id)] = [order_request, qty, is_market]
+        key = str(self.order_id)
         self.order_id += 1
-        return str(self.order_id - 1)
-
+        await self.call.write(request)
+        self.open_orders[key] = [order_request, qty, is_market]
+        return key
     async def place_swap_order(self, swap: str, qty: int) -> None:
         """
         Places a swap request with the exchange.
