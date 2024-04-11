@@ -119,9 +119,9 @@ class XChangeClient:
         request = utc_bot_pb2.ClientMessageToExchange(new_order=order_request)
         key = str(self.order_id)
         self.order_id += 1
+        self.open_orders[key] = [order_request, qty, is_market]
         async with self.request_lock:
             await self.call.write(request)
-        self.open_orders[key] = [order_request, qty, is_market]
         return key
     async def place_swap_order(self, swap: str, qty: int) -> None:
         """
@@ -155,6 +155,8 @@ class XChangeClient:
         :param msg: OrderFillMessage from exchange
         :return:
         """
+        if msg.id not in self.open_orders:
+            return
         order_info: list = self.open_orders[msg.id]
         symbol: str = order_info[0].symbol
         fill_qty: int = msg.qty
