@@ -249,6 +249,28 @@ class XChangeClient:
         _LOGGER.info("Received Positions from server")
         _LOGGER.info(self.positions)
 
+    def estimate_pnl(self):
+        """Calculates a pnl estimate using mid market prices"""
+        pnl = 0
+        if len(self.positions) == 0:
+            return pnl
+        for symbol, qty in self.positions.items():
+            if qty == 0:
+                continue
+            if symbol == 'cash':
+                pnl += qty
+            elif symbol in self.order_books:
+                book = self.order_books[symbol]
+                bids = [px  for px,qty in book.bids.items() if qty != 0]
+                asks = [px  for px,qty in book.asks.items() if qty != 0]
+                if len(bids) == 0 or len(asks) == 0:
+                    continue
+                best_bid = max(bids)
+                best_ask = min(asks)
+                mid = (best_bid + best_ask) / 2
+                pnl += mid * qty
+        return pnl
+
     async def bot_handle_book_update(self, symbol: str) -> None:
         """
         Function for the user to fill in if they want to have any action upon receiving
