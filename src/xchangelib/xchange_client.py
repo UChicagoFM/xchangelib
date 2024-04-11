@@ -1,4 +1,5 @@
 import grpc
+import asyncio
 from grpc import aio
 from . import service_pb2 as utc_bot_pb2
 from . import service_pb2_grpc as utc_bot_pb2_grpc
@@ -68,6 +69,7 @@ class XChangeClient:
         self.history = []
         self.connected = False
         self.call = None
+        self.request_lock = asyncio.Lock()
         if silent:
             _LOGGER.setLevel(logging.WARNING)
 
@@ -85,7 +87,8 @@ class XChangeClient:
 
         auth_request = utc_bot_pb2.AuthenticateRequest(username=self.username, password=self.password)
         request = utc_bot_pb2.ClientMessageToExchange(authenticate=auth_request)
-        await self.call.write(request)
+        async with self.request_lock:
+            await self.call.write(request)
 
         while True:
             response = await self.call.read()
@@ -116,7 +119,8 @@ class XChangeClient:
         request = utc_bot_pb2.ClientMessageToExchange(new_order=order_request)
         key = str(self.order_id)
         self.order_id += 1
-        await self.call.write(request)
+        async with self.request_lock:
+            await self.call.write(request)
         self.open_orders[key] = [order_request, qty, is_market]
         return key
     async def place_swap_order(self, swap: str, qty: int) -> None:
@@ -128,7 +132,8 @@ class XChangeClient:
         """
         swap_request = utc_bot_pb2.SwapRequest(name=swap, qty=qty)
         request = utc_bot_pb2.ClientMessageToExchange(swap=swap_request)
-        await self.call.write(request)
+        async with self.request_lock:
+            await self.call.write(request)
 
     async def cancel_order(self, order_id: str) -> None:
         """ Places a cancel order request for the given order id
@@ -138,8 +143,8 @@ class XChangeClient:
         _LOGGER.info("Requesting to cancel order: %s", order_id)
         cancel_request = utc_bot_pb2.CancelOrderRequest(id=order_id)
         request = utc_bot_pb2.ClientMessageToExchange(cancel_order=cancel_request)
-        await self.call.write(request)
-
+        async with self.request_lock:
+            await self.call.write(request)
     async def handle_trade_msg(self, msg):
         """Calls the bot trade message handler."""
         await self.bot_handle_trade_msg(msg.symbol, msg.px, msg.qty)
