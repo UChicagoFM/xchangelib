@@ -112,7 +112,6 @@ information about the helper functions.
 
     async def trade(self):
         """This is a task that is started right before the bot connects and runs in the background."""
-        await asyncio.sleep(5)
         print("attempting to trade")
         await self.place_order("BRV",3, xchange_client.Side.SELL, 7)
 
@@ -151,5 +150,12 @@ code block that prints the sorted order books.
             print(f"Bids for {security}:\n{sorted_bids}")
             print(f"Asks for {security}:\n{sorted_asks}")
 
+
+An estimate of the PnL can be found using :code:`XChangeClient.estimate_pnl()`. Below is an example
+code block that prints the sorted order books.
+
+.. code-block:: python
+
+        print("My PnL Estimate:", self.estimate_pnl())
 
 You can look at the entire example bot in  **example.py**

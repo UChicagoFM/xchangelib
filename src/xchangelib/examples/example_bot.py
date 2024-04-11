@@ -11,8 +11,9 @@ class MyXchangeClient(xchange_client.XChangeClient):
         super().__init__(host, username, password)
 
     async def bot_handle_cancel_response(self, order_id: str, success: bool, error: Optional[str]) -> None:
-        order = self.open_orders[order_id]
-        print(f"{'Market' if order[2] else 'Limit'} Order ID {order_id} cancelled, {order[1]} unfilled")
+        if success:
+            order = self.open_orders[order_id]
+            print(f"{'Market' if order[2] else 'Limit'} Order ID {order_id} cancelled, {order[1]} unfilled")
 
     async def bot_handle_order_fill(self, order_id: str, qty: int, price: int):
         print("order fill", self.positions)
@@ -36,7 +37,6 @@ class MyXchangeClient(xchange_client.XChangeClient):
 
     async def trade(self):
         """This is a task that is started right before the bot connects and runs in the background."""
-        await asyncio.sleep(5)
         print("attempting to trade")
         await self.place_order("BRV",3, xchange_client.Side.SELL, 7)
 
@@ -73,12 +73,20 @@ class MyXchangeClient(xchange_client.XChangeClient):
                 print(f"Bids for {security}:\n{sorted_bids}")
                 print(f"Asks for {security}:\n{sorted_asks}")
 
+    async def view_pnl_estimates(self):
+        """Prints an estimate of the PnL every 3 seconds."""
+        while True:
+            await asyncio.sleep(5)
+            print("My PnL Estimate:", self.estimate_pnl())
+
+
     async def start(self):
         """
         Creates tasks that can be run in the background. Then connects to the exchange
         and listens for messages.
         """
         asyncio.create_task(self.trade())
+        asyncio.create_task(self.view_pnl_estimates())
         # asyncio.create_task(self.view_books())
         await self.connect()
 
