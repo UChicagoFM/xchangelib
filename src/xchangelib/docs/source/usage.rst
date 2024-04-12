@@ -158,4 +158,15 @@ code block that prints the sorted order books.
 
         print("My PnL Estimate:", self.estimate_pnl())
 
+
+The positions can be viewed using :code:`XChangeClient.positions`. Below is an example
+code block that prints out a user's positions. The positions are maintained by the bot
+and are stored in a dictionary.
+
+.. code-block:: python
+
+        print("My positions:", self.positions)
+        # My positions: defaultdict(<class 'int'>, {'cash': 59865, 'BRV': -9, 'EPT': 1, 'DLO': -5, 'MKU': -3, 'JAK': 10, 'SCP': -10, 'IGM': 3})
+
+
 You can look at the entire example bot in  **example.py**
