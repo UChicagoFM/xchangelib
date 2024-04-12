@@ -181,7 +181,8 @@ class XChangeClient:
         :param msg: Order Rejected Message
         """
         await self.bot_handle_order_rejected(msg.id, msg.reason)
-        self.open_orders.pop(msg.id)
+        if msg.id in self.open_orders:
+            self.open_orders.pop(msg.id)
 
     async def handle_cancel_response(self, msg):
         """
@@ -193,7 +194,8 @@ class XChangeClient:
         if result_type == 'ok':
             _LOGGER.info("Cancel order %s successful.", msg.id)
             await self.bot_handle_cancel_response(msg.id, True, None)
-            self.open_orders.pop(msg.id)
+            if msg.id in self.open_orders:
+                self.open_orders.pop(msg.id)
         else:
             _LOGGER.info("Failed to cancel order %s.", msg.id)
             await self.bot_handle_cancel_response(msg.id, False, msg.error)
