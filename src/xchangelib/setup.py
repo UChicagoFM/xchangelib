@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='xchangelib',
-      version='0.0.7',
+      version='0.0.8',
       description="Client for xchangeV3",
       long_description="",
       author='Rohan Voddhi',
