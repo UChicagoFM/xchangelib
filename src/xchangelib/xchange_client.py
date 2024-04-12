@@ -11,7 +11,7 @@ from typing import Optional
 import time
 
 
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 
 logging.basicConfig(level=logging.INFO)
 _LOGGER = logging.getLogger("xchange-client")
