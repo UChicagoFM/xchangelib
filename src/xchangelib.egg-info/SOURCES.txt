@@ -13,3 +13,4 @@ src/xchangelib.egg-info/requires.txt
 src/xchangelib.egg-info/top_level.txt
 src/xchangelib/docs/source/conf.py
 src/xchangelib/examples/example_bot.py
+src/xchangelib/phoenixhood_api.py
