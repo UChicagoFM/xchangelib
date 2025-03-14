@@ -4,9 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xchangelib"
-version = "0.0.8"
+version = "0.1.0"
 authors = [
     { name="Rohan Voddhi", email="rohan.voddhi@gmail.com" },
+    { name="Ian Magnell", email="ianmm3203@gmail.com"}
 ]
 description = "A client library for interacting with xchange-v3"
 readme = "README.md"

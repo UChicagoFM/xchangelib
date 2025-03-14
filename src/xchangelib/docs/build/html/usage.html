@@ -1,23 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; xchangelib 0.0.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+  <title>Usage &mdash; xchangelib 0.0.8 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=525cde36"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=53b53b71"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -78,24 +76,24 @@
            <div itemprop="articleBody">
              
   <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
 <section id="installation">
-<span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>To use xchangelib, first install it using pip:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>xchangelib
 </pre></div>
 </div>
 </section>
 <section id="setup">
-<span id="id2"></span><h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<span id="id2"></span><h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
 <dl>
-<dt>To use the client, create a subclass of the <strong>XChangeClient</strong> object.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyXchangeClient</span><span class="p">(</span><span class="n">xchange_client</span><span class="o">.</span><span class="n">XChangeClient</span><span class="p">):</span>
+<dt>To use the client, create a subclass of the <strong>XChangeClient</strong> object.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyXchangeClient</span><span class="p">(</span><span class="n">xchange_client</span><span class="o">.</span><span class="n">XChangeClient</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;A shell client with the methods that can be implemented to interact with the xchange.&#39;&#39;&#39;</span>
 
-     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">         </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">         Creates tasks that can be run in the background. Then connects to the exchange</span>
 <span class="sd">         and listens for messages.</span>
@@ -108,32 +106,32 @@
 <p>You should also implement the bot handler methods that are defined. Below we implemented the methods
 so that it prints the type of update and some information about the update when the bot receives an update from the
 exchange. In your bots, you can choose to trade or cancel orders based on the messages received.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyXchangeClient</span><span class="p">(</span><span class="n">xchange_client</span><span class="o">.</span><span class="n">XChangeClient</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyXchangeClient</span><span class="p">(</span><span class="n">xchange_client</span><span class="o">.</span><span class="n">XChangeClient</span><span class="p">):</span>
      <span class="o">...</span>
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_cancel_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_cancel_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
          <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_orders</span><span class="p">[</span><span class="n">order_id</span><span class="p">]</span>
          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Market&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">order</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Limit&#39;</span><span class="si">}</span><span class="s2"> Order ID </span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s2"> cancelled, </span><span class="si">{</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> unfilled&quot;</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_order_fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_order_fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;order fill&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_order_rejected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_order_rejected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;order rejected because of &quot;</span><span class="p">,</span> <span class="n">reason</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_trade_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_trade_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;something was traded&quot;</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_book_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_book_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;book update&quot;</span><span class="p">)</span>
 
-     <span class="k">async</span> <span class="k">def</span> <span class="nf">bot_handle_swap_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">swap</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bot_handle_swap_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">swap</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swap response&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The next step is to connect your bot to the exchange. To do this, instantiate your bot and
 call the start function. Now, the bot will connect to the xchange and your bot handlers will
 be run whenever a message is received from the xchange.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">SERVER</span> <span class="o">=</span> <span class="s1">&#39;SERVER URL&#39;</span>
     <span class="n">my_client</span> <span class="o">=</span> <span class="n">MyXchangeClient</span><span class="p">(</span><span class="n">SERVER</span><span class="p">,</span><span class="s2">&quot;USERNAME&quot;</span><span class="p">,</span><span class="s2">&quot;PASSWORD&quot;</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">my_client</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -147,7 +145,7 @@ be run whenever a message is received from the xchange.</p>
 <p>Your bot can also choose to operate independent of function callbacks from the xchange. To
 do this, you can use <strong>asyncio.create_task</strong> to create a task before you start your bot. For example,
 we created a function below that prints the order books every 3 seconds.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">view_books</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">view_books</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints the books every 3 seconds.&quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -159,7 +157,7 @@ we created a function below that prints the order books every 3 seconds.</p>
 </pre></div>
 </div>
 <p>We also need to modify our <strong>start(self)</strong> function to create the tasks.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates tasks that can be run in the background. Then connects to the exchange</span>
 <span class="sd">    and listens for messages.</span>
@@ -172,9 +170,8 @@ we created a function below that prints the order books every 3 seconds.</p>
 implemented to interact with the xchange. You can place and cancel orders, view
 your positions, view the order books, and place swaps. Check out the <a class="reference internal" href="api.html"><span class="doc">API</span></a> for more
 information about the helper functions.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">trade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">trade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a task that is started right before the bot connects and runs in the background.&quot;&quot;&quot;</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;attempting to trade&quot;</span><span class="p">)</span>
     <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_order</span><span class="p">(</span><span class="s2">&quot;BRV&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">xchange_client</span><span class="o">.</span><span class="n">Side</span><span class="o">.</span><span class="n">SELL</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 
@@ -200,6 +197,20 @@ information about the helper functions.</p>
 
     <span class="c1"># Viewing Positions</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My positions:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The order books are stored in <code class="code docutils literal notranslate"><span class="pre">XChangeClient.order_books</span></code>. Below is an example
+code block that prints the sorted order books.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">security</span><span class="p">,</span> <span class="n">book</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_books</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sorted_bids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">bids</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">sorted_asks</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">asks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bids for </span><span class="si">{</span><span class="n">security</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">sorted_bids</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Asks for </span><span class="si">{</span><span class="n">security</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">sorted_asks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An estimate of the PnL can be found using <code class="code docutils literal notranslate"><span class="pre">XChangeClient.estimate_pnl()</span></code>. Below is an example
+code block that prints the sorted order books.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My PnL Estimate:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_pnl</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>You can look at the entire example bot in  <strong>example.py</strong></p>
