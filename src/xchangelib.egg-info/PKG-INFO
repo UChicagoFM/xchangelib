@@ -13,7 +13,12 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: setuptools>=69.0
 Requires-Dist: protobuf==5.26.0
-Requires-Dist: grpcio==1.62.1
+Requires-Dist: grpcio==1.71.0
+Requires-Dist: Flask==3.1.0
+Requires-Dist: Flask_Cors==5.0.0
+Requires-Dist: Flask_SSE==1.0.0
+Requires-Dist: redis==5.2.1
+Requires-Dist: Requests==2.32.3
 
 # xchange-v3-client
 

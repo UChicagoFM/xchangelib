@@ -1,19 +1,18 @@
 from typing import Optional
 
-from xchangelib import xchange_client
+import xchange_client
 import asyncio
+import argparse
 
 
 class MyXchangeClient(xchange_client.XChangeClient):
-    '''A shell client with the methods that can be implemented to interact with the xchange.'''
 
     def __init__(self, host: str, username: str, password: str):
         super().__init__(host, username, password)
 
     async def bot_handle_cancel_response(self, order_id: str, success: bool, error: Optional[str]) -> None:
-        if success:
-            order = self.open_orders[order_id]
-            print(f"{'Market' if order[2] else 'Limit'} Order ID {order_id} cancelled, {order[1]} unfilled")
+        order = self.open_orders[order_id]
+        print(f"{'Market' if order[2] else 'Limit'} Order ID {order_id} cancelled, {order[1]} unfilled")
 
     async def bot_handle_order_fill(self, order_id: str, qty: int, price: int):
         print("order fill", self.positions)
@@ -23,48 +22,62 @@ class MyXchangeClient(xchange_client.XChangeClient):
 
 
     async def bot_handle_trade_msg(self, symbol: str, price: int, qty: int):
-        # print("something was traded")
         pass
 
     async def bot_handle_book_update(self, symbol: str) -> None:
-        # print("book update")
         pass
 
     async def bot_handle_swap_response(self, swap: str, qty: int, success: bool):
-        # print("Swap response")
         pass
 
+    async def bot_handle_news(self, news_release: dict):
+
+        # Parsing the message based on what type was received
+        timestamp = news_release["timestamp"] # This is in exchange ticks not ISO or Epoch
+        news_type = news_release['kind']
+        news_data = news_release["new_data"]
+
+        if news_type == "structured":
+            subtype = news_data["structured_subtype"]
+            symb = news_data["asset"]
+            if subtype == "earnings":
+                
+                earnings = news_data["value"]
+
+                # Do something with this data
+
+            else:
+
+             
+                new_signatures = news_data["new_signatures"]
+                cumulative = news_data["cumulative"]
+
+                # Do something with this data
+        else:
+
+            # Not sure what you would do with unstructured data....
+
+            pass
 
     async def trade(self):
-        """This is a task that is started right before the bot connects and runs in the background."""
+        await asyncio.sleep(5)
         print("attempting to trade")
-        await self.place_order("BRV",3, xchange_client.Side.SELL, 7)
-
-        # Cancelling an order
-        order_to_cancel = await self.place_order("BRV",3, xchange_client.Side.BUY, 5)
+        await self.place_order("APT",3, xchange_client.Side.BUY, 5)
+        await self.place_order("APT",3, xchange_client.Side.SELL, 7)
         await asyncio.sleep(5)
-        await self.cancel_order(order_to_cancel)
-
-        # Placing Swap requests
-        await self.place_swap_order('toJAK', 1)
+        await self.cancel_order(list(self.open_orders.keys())[0])
+        await self.place_swap_order('toAKAV', 1)
         await asyncio.sleep(5)
-        await self.place_swap_order('fromSCP', 1)
+        await self.place_swap_order('fromAKAV', 1)
         await asyncio.sleep(5)
-
-        # Placing an order that gets rejected for exceeding qty limits
-        await self.place_order("BRV",1000, xchange_client.Side.SELL, 7)
+        await self.place_order("APT",1000, xchange_client.Side.SELL, 7)
         await asyncio.sleep(5)
-
-        # Placing a market order
-        market_order_id = await self.place_order("BRV",10, xchange_client.Side.SELL)
-        print("Market Order ID:", market_order_id)
+        market_order_id = await self.place_order("APT",10, xchange_client.Side.SELL)
+        print("MARKET ORDER ID:", market_order_id)
         await asyncio.sleep(5)
-
-        # Viewing Positions
-        print("My positions:", self.positions)
+        print("my positions:", self.positions)
 
     async def view_books(self):
-        """Prints the books every 3 seconds."""
         while True:
             await asyncio.sleep(3)
             for security, book in self.order_books.items():
@@ -73,33 +86,43 @@ class MyXchangeClient(xchange_client.XChangeClient):
                 print(f"Bids for {security}:\n{sorted_bids}")
                 print(f"Asks for {security}:\n{sorted_asks}")
 
-    async def view_pnl_estimates(self):
-        """Prints an estimate of the PnL every 3 seconds."""
-        while True:
-            await asyncio.sleep(5)
-            print("My PnL Estimate:", self.estimate_pnl())
-
-
-    async def start(self):
-        """
-        Creates tasks that can be run in the background. Then connects to the exchange
-        and listens for messages.
-        """
+    async def start(self, user_interface):
         asyncio.create_task(self.trade())
-        asyncio.create_task(self.view_pnl_estimates())
-        # asyncio.create_task(self.view_books())
+
+        # This is where Phoenixhood will be launched if desired. There is no need to change these
+        # lines, you can either remove the if or delete the whole thing depending on your purposes.
+        if user_interface:
+            self.launch_user_interface()
+            asyncio.create_task(self.handle_queued_messages())
+
         await self.connect()
 
 
-async def main():
-    SERVER = '18.188.190.235:3333' # run on sandbox
-    my_client = MyXchangeClient(SERVER,"USERNAME","PASSWORD")
-    await my_client.start()
+async def main(user_interface: bool):
+    # SERVER = '127.0.0.1:8000'   # run locally
+    SERVER = '3.138.154.148:3333' # run on sandbox
+    TEAMNAME = ""
+    PASSWORD = ""
+    my_client = MyXchangeClient(SERVER,TEAMNAME,PASSWORD)
+    await my_client.start(user_interface)
     return
 
 if __name__ == "__main__":
+
+    # This parsing is unnecessary if you know whether you are using Phoenixhood.
+    # It is included here so you can see how one might start the API.
+
+    parser = argparse.ArgumentParser(
+        description="Script that connects client to exchange, runs algorithmic trading logic, and optionally deploys Phoenixhood"
+    )
+
+    parser.add_argument("--phoenixhood", required=False, default=False, type=bool, help="Starts phoenixhood API if true")
+    args = parser.parse_args()
+
+    user_interface = args.phoenixhood
+
     loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(main())
+    result = loop.run_until_complete(main(user_interface))
 
 
 
